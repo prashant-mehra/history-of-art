@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search — Art History</title><meta name="description" content="Search eras, works, artists and more.">
+<link rel="stylesheet" href="../assets/style.css"><script src="../assets/site.js" defer></script>
+</head><body data-root=".."><main class="wrap">
+<p class="crumbs"><a href="../">Home</a> › Search</p>
+<h1>Search</h1><div class="filters"><label>Search the site<input type="search" id="q" placeholder="e.g. Rembrandt, fresco, Egypt" autofocus></label></div><p class="meta" id="n"></p><ul class="results" id="r"></ul>
+<script>var IDX=[];var root='..';
+fetch('../assets/search.json').then(function(r){return r.json()}).then(function(d){IDX=d;var p=new URLSearchParams(location.search).get('q');if(p){document.getElementById('q').value=p}go()});
+function go(){var q=document.getElementById('q').value.toLowerCase().trim();var ul=document.getElementById('r');ul.textContent='';if(!q){document.getElementById('n').textContent='';return}
+var m=IDX.filter(function(x){return (x.t+' '+x.d+' '+x.k).toLowerCase().indexOf(q)>-1}).sort(function(a,b){return (b.t.toLowerCase().indexOf(q)>-1)-(a.t.toLowerCase().indexOf(q)>-1)}).slice(0,60);
+document.getElementById('n').textContent=m.length+' results';
+m.forEach(function(x){var li=document.createElement('li');var a=document.createElement('a');a.href=root+'/'+x.u;a.textContent=x.t;var s=document.createElement('span');s.className='tag';s.textContent=x.k;var p=document.createElement('p');p.textContent=x.d;li.append(a,document.createTextNode(' '),s,p);ul.appendChild(li)})}
+document.getElementById('q').addEventListener('input',go);</script>
+</main></body></html>

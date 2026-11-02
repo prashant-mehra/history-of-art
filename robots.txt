@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://prashant-mehra.github.io/history-of-art/sitemap.xml

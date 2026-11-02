@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The 19th century quiz — Art History</title><meta name="description" content="Quiz on The 19th century.">
+<link rel="stylesheet" href="../../../assets/style.css"><script src="../../../assets/site.js" defer></script>
+</head><body data-root="../../.."><main class="wrap">
+<p class="crumbs"><a href="../../../">Home</a> › <a href="../../../learn/">Learn</a> › <a href="../../../learn/quizzes/">Quizzes</a> › The 19th century</p>
+<h1>The 19th century quiz</h1><form id="quiz"></form><p><button class="btn" id="go" type="button">Check answers</button> <span id="res" class="meta" role="status"></span></p>
+<p><a href="../../../eras/19th-century/">Read about The 19th century</a></p>
+<script>var Q=[{"q": "The name 'Impressionism' came from a painting by...", "o": ["Monet", "Manet", "Renoir", "Degas"], "a": 0}, {"q": "Who painted The Third of May 1808?", "o": ["Goya", "Delacroix", "David", "Turner"], "a": 0}, {"q": "Which artist made The Great Wave?", "o": ["Hokusai", "Hiroshige", "Utamaro", "Sharaku"], "a": 0}, {"q": "Pointillism is associated with...", "o": ["Seurat", "Cézanne", "Courbet", "Manet"], "a": 0}];
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var f=document.getElementById('quiz');
+Q.forEach(function(x,i){var fs=document.createElement('fieldset');var lg=document.createElement('legend');lg.textContent=(i+1)+'. '+x.q;fs.appendChild(lg);
+ sh(x.o.map(function(t,k){return {t:t,c:k===x.a}})).forEach(function(o){var l=document.createElement('label');var r=document.createElement('input');r.type='radio';r.name='q'+i;r.value=o.c?'1':'0';l.appendChild(r);l.append(' '+o.t);fs.appendChild(l)});f.appendChild(fs)});
+document.getElementById('go').addEventListener('click',function(){var s=0;Q.forEach(function(x,i){var c=f.querySelector('input[name=q'+i+']:checked');var fs=f.querySelectorAll('fieldset')[i];fs.classList.remove('ok','bad');if(c&&c.value==='1'){s++;fs.classList.add('ok')}else fs.classList.add('bad')});
+document.getElementById('res').textContent='Score: '+s+' / '+Q.length;});</script>
+</main></body></html>

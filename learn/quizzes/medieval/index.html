@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medieval art quiz — Art History</title><meta name="description" content="Quiz on Medieval art.">
+<link rel="stylesheet" href="../../../assets/style.css"><script src="../../../assets/site.js" defer></script>
+</head><body data-root="../../.."><main class="wrap">
+<p class="crumbs"><a href="../../../">Home</a> › <a href="../../../learn/">Learn</a> › <a href="../../../learn/quizzes/">Quizzes</a> › Medieval art</p>
+<h1>Medieval art quiz</h1><form id="quiz"></form><p><button class="btn" id="go" type="button">Check answers</button> <span id="res" class="meta" role="status"></span></p>
+<p><a href="../../../eras/medieval/">Read about Medieval art</a></p>
+<script>var Q=[{"q": "What is the key structural feature of Gothic cathedrals?", "o": ["Flying buttresses and pointed arches", "Round arches and thick walls", "Flat roofs", "Concrete domes"], "a": 0}, {"q": "The Bayeux Tapestry is actually a...", "o": ["Embroidery", "Woven carpet", "Painting", "Mosaic"], "a": 0}, {"q": "Which medieval Irish manuscript is richly decorated?", "o": ["Book of Kells", "Domesday Book", "Codex Leicester", "Vulgate"], "a": 0}];
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var f=document.getElementById('quiz');
+Q.forEach(function(x,i){var fs=document.createElement('fieldset');var lg=document.createElement('legend');lg.textContent=(i+1)+'. '+x.q;fs.appendChild(lg);
+ sh(x.o.map(function(t,k){return {t:t,c:k===x.a}})).forEach(function(o){var l=document.createElement('label');var r=document.createElement('input');r.type='radio';r.name='q'+i;r.value=o.c?'1':'0';l.appendChild(r);l.append(' '+o.t);fs.appendChild(l)});f.appendChild(fs)});
+document.getElementById('go').addEventListener('click',function(){var s=0;Q.forEach(function(x,i){var c=f.querySelector('input[name=q'+i+']:checked');var fs=f.querySelectorAll('fieldset')[i];fs.classList.remove('ok','bad');if(c&&c.value==='1'){s++;fs.classList.add('ok')}else fs.classList.add('bad')});
+document.getElementById('res').textContent='Score: '+s+' / '+Q.length;});</script>
+</main></body></html>
