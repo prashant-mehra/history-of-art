@@ -380,7 +380,13 @@ document.getElementById('q').addEventListener('input',go);</script>"""
 <p>To suggest a correction, a new work or an image with a clear open license, open an issue in the project repository. Please include a source for any factual correction.</p>
 <p>See <a href="../about/">About</a> for sources and the accuracy policy.</p></div>"""
     write("contact/index.html", "Contact — Art History", "How to suggest corrections or additions.", body, [("Contact", None)])
-    write("404.html", "Page not found — Art History", "Page not found.", '<h1>Page not found</h1><p>Try the <a href="/">home page</a> or <a href="/search/">search</a>.</p>')
+    B = "/history-of-art"  # project-pages path prefix; the 404 page is served from any depth, so it needs absolute paths
+    (OUT / "404.html").write_text(f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found — Art History</title><link rel="stylesheet" href="{B}/assets/style.css"></head>
+<body><main class="wrap"><h1>Page not found</h1><p>Try the <a href="{B}/">home page</a>, <a href="{B}/search/">search</a> or the <a href="{B}/eras/">eras</a>.</p></main></body></html>
+""", encoding="utf-8")
+    written.append(("404.html", "Page not found — Art History", "Page not found."))
     # 404 uses root-relative assets; fix for depth-0 file already relative "."
 
 def build_search_and_sitemap():
@@ -415,8 +421,8 @@ def inject_prehistoric():
         t = p.read_text(encoding="utf-8")
         def sub(m):
             k = m.group(1)
-            return f"<!--fig:{k}-->" + fig(k, "../../../..", m.group(2)) + "<!--/fig-->"
-        t2 = re.sub(r"<!--fig:([\w-]+) alt=\"([^\"]*)\"-->.*?<!--/fig-->", lambda m: f"<!--fig:{m.group(1)} alt=\"{m.group(2)}\"-->" + fig(m.group(1), "../../../..", m.group(2)) + "<!--/fig-->", t, flags=re.S)
+            return f"<!--fig:{k}-->" + fig(k, "../../..", m.group(2)) + "<!--/fig-->"
+        t2 = re.sub(r"<!--fig:([\w-]+) alt=\"([^\"]*)\"-->.*?<!--/fig-->", lambda m: f"<!--fig:{m.group(1)} alt=\"{m.group(2)}\"-->" + fig(m.group(1), "../../..", m.group(2)) + "<!--/fig-->", t, flags=re.S)
         if t2 != t: p.write_text(t2, encoding="utf-8")
 
 build_eras(); build_regions(); build_movements(); build_artists(); build_works(); build_themes(); build_learn(); build_timeline(); build_misc(); build_credits(); inject_prehistoric(); build_search_and_sitemap()
